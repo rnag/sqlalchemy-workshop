@@ -19,12 +19,15 @@ def hello():
 
 @app.get("/api/customers")
 def customers():
-    return get_customers()
+    customers = get_customers()
+    # print(customers)
+    return (customer.as_dict() for customer in customers)
 
 
 @app.get("/api/orders/{cust_id}")
 def orders(cust_id: int):
-    return get_orders_of_customer(cust_id)
+    orders = get_orders_of_customer(cust_id)
+    return (order._asdict() for order in orders)
 
 
 @app.get("/api/order_total/{order_id}")
